@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Item details</title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<main class="main">
+			<%- include('./partials/menu') %>
+			<div class="content">
+				<h1><%= title %></h1>
+				<ul>
+					<% data.forEach(element => { %>
+					<li><a href="<%= element.url %> "><%= element.name %></a></li>
+					<% }) %>
+				</ul>
+			</div>
+		</main>
+	</body>
+</html>

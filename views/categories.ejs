@@ -10,9 +10,9 @@
 			<div class="content">
 				<h1><%= title %></h1>
 				<ul>
-					<li><strong><%= data.item_count %></strong> items</li>
-					<li><strong><%= data.category_count%></strong> categories</li>
-					<li><strong><%= data.producer_count%> </strong>producers</li>
+					<% data.forEach(item => { %>
+					<li><a href="<%= item.url %>"><%= item.name %></a></li>
+					<% }) %>
 				</ul>
 			</div>
 		</main>

@@ -9,10 +9,11 @@
 			<%- include('./partials/menu') %>
 			<div class="content">
 				<h1><%= title %></h1>
+				<h2><%= category.name %></h2>
 				<ul>
-					<li><strong><%= data.item_count %></strong> items</li>
-					<li><strong><%= data.category_count%></strong> categories</li>
-					<li><strong><%= data.producer_count%> </strong>producers</li>
+					<% items.forEach(element => { %>
+					<li><a href="<%= element.url %> "><%= element.name %> </a></li>
+					<% }); %>
 				</ul>
 			</div>
 		</main>
