@@ -33,8 +33,6 @@ exports.producer_details = function (req, res, next) {
 				items: results.producer_items,
 				err: err,
 			});
-
-			console.log(results.producer_items);
 		}
 	);
 };
