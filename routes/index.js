@@ -8,6 +8,18 @@ const producer_controller = require("../controllers/producerController");
 /* GET home page. */
 router.get("/", item_controller.index);
 
+/* POST add category */
+router.post("/category/create", category_controller.category_create_post);
+
+/* GET add category */
+router.get("/category/create", category_controller.category_create_get);
+
+/* POST producer form */
+router.post("/producer/create", producer_controller.producer_form_post);
+
+/* GET producer form */
+router.get("/producer/create", producer_controller.producer_form_get);
+
 /* GET item list */
 router.get("/items", item_controller.item_list);
 
@@ -25,5 +37,11 @@ router.get("/producers", producer_controller.producers_list);
 
 /* GET producer details */
 router.get("/producer/:id", producer_controller.producer_details);
+
+/* GET item form */
+router.get("/item/create", item_controller.item_form_get);
+
+/* POST new item */
+router.post("/item/create", item_controller.item_form_post);
 
 module.exports = router;

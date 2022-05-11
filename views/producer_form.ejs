@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<main class="main">
+			<%- include('./partials/menu') %>
+			<div class="content">
+				<h1><%= title %></h1>
+				<form action="" method="post">
+					<label for="producer_name">Producer name</label>
+					<input
+						type="text"
+						id="producer_name"
+						name="producer_name"
+						value="<%= typeof producer != 'undefined' ? producer.name : '' %>"
+					/>
+					<button type="submit">Add</button>
+				</form>
+			</div>
+		</main>
+	</body>
+</html>
