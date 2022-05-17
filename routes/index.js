@@ -24,7 +24,7 @@ router.get("/producer/create", producer_controller.producer_form_get);
 router.get("/items", item_controller.item_list);
 
 /* GET item detail */
-router.get("/items/:id", item_controller.item_details);
+router.get("/item/:id", item_controller.item_details);
 
 /* GET categories list */
 router.get("/categories", category_controller.categories_list);
@@ -43,5 +43,23 @@ router.get("/item/create", item_controller.item_form_get);
 
 /* POST new item */
 router.post("/item/create", item_controller.item_form_post);
+
+/* GET delete category */
+router.get("/category/:id/delete", category_controller.category_delete_get);
+
+/* POST delete category */
+router.post("/category/:id/delete", category_controller.category_delete_post);
+
+/* GET delete producer */
+router.get("/producer/:id/delete", producer_controller.producer_delete_get);
+
+/* POST delete producer */
+router.post("/producer/:id/delete", producer_controller.producer_delete_post);
+
+/* GET delete item */
+router.get("/item/:id/delete", item_controller.item_delete_get);
+
+/* POST delete item */
+router.post("/item/:id/delete", item_controller.item_delete_post);
 
 module.exports = router;

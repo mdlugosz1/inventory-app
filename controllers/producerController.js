@@ -2,6 +2,7 @@ const async = require("async");
 const { body, validationResult } = require("express-validator");
 const Producer = require("../models/producer");
 const Item = require("../models/item");
+const { retry } = require("async");
 
 exports.producers_list = function (req, res, next) {
 	Producer.find({}, function (err, results) {
@@ -31,6 +32,7 @@ exports.producer_details = function (req, res, next) {
 			res.render("producer", {
 				title: results.producer.name + " details",
 				items: results.producer_items,
+				producer: results.producer,
 				err: err,
 			});
 		}
@@ -74,3 +76,37 @@ exports.producer_form_post = [
 		}
 	},
 ];
+
+exports.producer_delete_get = function (req, res, next) {
+	async.parallel(
+		{
+			items: function (callback) {
+				Item.find({ producer: req.params.id }, callback);
+			},
+			producer: function (callback) {
+				Producer.findOne({ _id: req.params.id }, callback);
+			},
+		},
+		function (err, results) {
+			if (err) {
+				return next(err);
+			}
+
+			res.render("producer_delete", {
+				title: "Remove produer",
+				items: results.items,
+				producer: results.producer,
+			});
+		}
+	);
+};
+
+exports.producer_delete_post = function (req, res, next) {
+	Producer.findByIdAndDelete(req.body.producerid, (err) => {
+		if (err) {
+			return next(err);
+		}
+
+		res.redirect("/");
+	});
+};

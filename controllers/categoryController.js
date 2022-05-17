@@ -72,3 +72,37 @@ exports.category_create_post = [
 		}
 	},
 ];
+
+exports.category_delete_get = function (req, res, next) {
+	async.parallel(
+		{
+			category: function (callback) {
+				Category.findOne({ _id: req.params.id }, callback);
+			},
+			items: function (callback) {
+				Item.find({ category: req.params.id }, callback);
+			},
+		},
+		function (err, results) {
+			if (err) {
+				return next(err);
+			}
+
+			res.render("category_delete", {
+				title: "Deleting category category",
+				category: results.category,
+				items: results.items,
+			});
+		}
+	);
+};
+
+exports.category_delete_post = function (req, res, next) {
+	Category.findByIdAndDelete(req.body.categoryid, function (err) {
+		if (err) {
+			return next(err);
+		}
+
+		res.redirect("/");
+	});
+};

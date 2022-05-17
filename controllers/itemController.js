@@ -137,3 +137,23 @@ exports.item_form_post = [
 		}
 	},
 ];
+
+exports.item_delete_get = function (req, res, next) {
+	Item.findOne({ _id: req.params.id }, function (err, results) {
+		if (err) {
+			return next(err);
+		}
+
+		res.render("item_delete", { title: "Remove item", item: results });
+	});
+};
+
+exports.item_delete_post = function (req, res, next) {
+	Item.findByIdAndDelete(req.body.itemid, (err) => {
+		if (err) {
+			return next(err);
+		}
+
+		res.redirect("/");
+	});
+};
