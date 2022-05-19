@@ -5,8 +5,11 @@ const item_controller = require("../controllers/itemController");
 const category_controller = require("../controllers/categoryController");
 const producer_controller = require("../controllers/producerController");
 
-/* GET home page. */
-router.get("/", item_controller.index);
+/* GET item form */
+router.get("/item/create", item_controller.item_form_get);
+
+/* POST new item */
+router.post("/item/create", item_controller.item_form_post);
 
 /* POST add category */
 router.post("/category/create", category_controller.category_create_post);
@@ -38,12 +41,6 @@ router.get("/producers", producer_controller.producers_list);
 /* GET producer details */
 router.get("/producer/:id", producer_controller.producer_details);
 
-/* GET item form */
-router.get("/item/create", item_controller.item_form_get);
-
-/* POST new item */
-router.post("/item/create", item_controller.item_form_post);
-
 /* GET delete category */
 router.get("/category/:id/delete", category_controller.category_delete_get);
 
@@ -61,5 +58,26 @@ router.get("/item/:id/delete", item_controller.item_delete_get);
 
 /* POST delete item */
 router.post("/item/:id/delete", item_controller.item_delete_post);
+
+/* GET update category */
+router.get("/category/:id/update", category_controller.category_update_get);
+
+/* POST update category */
+router.post("/category/:id/update", category_controller.category_update_post);
+
+/* GET update producer */
+router.get("/producer/:id/update", producer_controller.producer_update_get);
+
+/* POST update producer */
+router.post("/producer/:id/update", producer_controller.producer_update_post);
+
+/* GET update item */
+router.get("/item/:id/update", item_controller.item_update_get);
+
+/* POST update item */
+router.post("/item/:id/update", item_controller.item_update_post);
+
+/* GET home page. */
+router.get("/", item_controller.index);
 
 module.exports = router;

@@ -41,7 +41,8 @@
 						<label for="category">Choose category:</label>
 						<select id="category" name="category">
 							<% categories.forEach(category => { %>
-							<option value="<%= category._id %>"><%= category.name %></option>
+							<option value="<%= category._id %>" <%= category._id.toString() ===
+								item.category[0]._id.toString() ? 'selected' : "" %>><%= category.name %></option>
 							<% }) %>
 						</select>
 					</div>
@@ -49,7 +50,8 @@
 						<label for="producer">Choose a producer:</label>
 						<select id="producer" name="producer">
 							<% producers.forEach(producer => { %>
-							<option value="<%= producer._id %>"><%= producer.name %></option>
+							<option value="<%= producer._id %>" <%= producer._id.toString() ===
+								item.producer._id.toString() ? 'selected' : "" %>><%= producer.name %></option>
 							<% }) %>
 						</select>
 					</div>

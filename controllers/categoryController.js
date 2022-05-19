@@ -106,3 +106,38 @@ exports.category_delete_post = function (req, res, next) {
 		res.redirect("/");
 	});
 };
+
+exports.category_update_get = function (req, res, next) {
+	Category.findOne({ _id: req.params.id }, function (err, results) {
+		if (err) {
+			return next(err);
+		}
+
+		res.render("category_form", { title: "Update category", category: results });
+	});
+};
+
+exports.category_update_post = [
+	body("cat_name").trim().isLength({ min: 3 }).escape(),
+	(req, res, next) => {
+		const category = new Category({
+			_id: req.params.id,
+			name: req.body.cat_name,
+		});
+
+		const errors = validationResult(req);
+
+		if (!errors.isEmpty()) {
+			res.render("category_form", { title: "Update category", category: category });
+			return;
+		} else {
+			Category.findByIdAndUpdate(req.params.id, category, {}, function (err, results) {
+				if (err) {
+					return next(err);
+				}
+
+				res.redirect(results.url);
+			});
+		}
+	},
+];

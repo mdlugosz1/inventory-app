@@ -110,3 +110,37 @@ exports.producer_delete_post = function (req, res, next) {
 		res.redirect("/");
 	});
 };
+
+exports.producer_update_get = function (req, res, next) {
+	Producer.findOne({ _id: req.params.id }, function (err, results) {
+		if (err) {
+			return next(err);
+		}
+
+		res.render("producer_form", { title: "Update producer", producer: results });
+	});
+};
+
+exports.producer_update_post = [
+	body("producer_name").trim().escape(),
+	(req, res, next) => {
+		const producer = new Producer({
+			_id: req.params.id,
+			name: req.body.producer_name,
+		});
+
+		const errors = validationResult(req);
+
+		if (!errors.isEmpty()) {
+			res.render("producer_form", { title: "Update producer", producer: producer });
+		} else {
+			Producer.findOneAndUpdate(req.params.id, producer, {}, function (err, newProducer) {
+				if (err) {
+					return next(err);
+				}
+
+				res.redirect(newProducer.url);
+			});
+		}
+	},
+];
